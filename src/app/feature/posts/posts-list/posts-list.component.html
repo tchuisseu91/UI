@@ -1,0 +1,58 @@
+<div class="container">
+    <h1 class="mt-3">Posts List</h1>
+
+          <div class="row g-3">
+          
+            <div class="col-md-3">
+                <label for="tags" class="form-label">Tags separated by coma</label>
+                <input [(ngModel)]="request.tags" type="text" class="form-control" id="tags" placeholder="Example: startups,tech,history">
+            </div>
+            <div class="col-md-3">
+                <label for="sortBy" class="form-label">Sort by</label>
+                <select id="sortBy" class="form-select" [(ngModel)]="request.sortBy">
+                    <option *ngFor="let sortBy of sortByValues" value={{sortBy}}>{{sortBy}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="direction" class="form-label">Direction</label>
+                <select id="direction" class="form-select" [(ngModel)]="request.direction">
+                    <option *ngFor="let direction of directions" value={{direction}}>{{direction}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button (click)="this.getPosts()" class="btn btn-primary mb-3" id="submit">Show Posts</button>
+            </div>
+        </div>
+       
+  
+    <ng-container *ngIf="model">
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Author</th>
+                    <th>AuthorId</th>
+                    <th>Likes</th>
+                    <th>Popularity</th>
+                    <th>Reads</th>
+                    <th>Tags</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let post of model">
+                    <td>{{post.id}}</td>
+                    <td>{{post.author}}</td>
+                    <td>{{post.authorId}}</td>
+                    <td>{{post.likes}}</td>
+                    <td>{{post.popularity}}</td>
+                    <td>{{post.reads}}</td>
+                    <td>{{post.tags}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </ng-container>
+    <ng-container *ngIf="!model">
+        <h3 class="mt-3">No Posts to display</h3>
+    </ng-container>
+</div>
